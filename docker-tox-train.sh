@@ -1,11 +1,9 @@
 docker container run \
         -it \
         --rm \
+        --userns=keep-id \
         -w /build-bionic \
-        -v `pwd`:/build-bionic  \
+        -v "`pwd`:/build-bionic:Z"  \
         --user "$(id -u):$(id -g)" \
-        --volume="/etc/group:/etc/group:ro" \
-        --volume="/etc/passwd:/etc/passwd:ro" \
-        --volume="/etc/shadow:/etc/shadow:ro" \
         nova-tox-train /bin/bash
 

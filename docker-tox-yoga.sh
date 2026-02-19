@@ -1,11 +1,9 @@
 docker container run \
         -it \
         --rm \
+        --userns=keep-id \
         -w /build-jammy \
-        -v `pwd`:/build-jammy  \
+        -v "`pwd`:/build-jammy:Z" \
         --user "$(id -u):$(id -g)" \
-        --volume="/etc/group:/etc/group:ro" \
-        --volume="/etc/passwd:/etc/passwd:ro" \
-        --volume="/etc/shadow:/etc/shadow:ro" \
         nova-tox-yoga /bin/bash
 
